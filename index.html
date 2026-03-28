@@ -1,35 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vestige Photography</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vestige Photography</title>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Reset & Base */
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {font-family:'Lato', sans-serif; color:#fff; background:#0d0d0d; line-height:1.6; scroll-behavior: smooth;}
+    a {color:#cfa17a; text-decoration:none;}
+    img {width:100%; display:block;}
+    .container {width:90%; max-width:1200px; margin:0 auto;}
+
+    /* Navigation */
+    nav {position:fixed; top:0; width:100%; padding:20px; display:flex; justify-content:center; background:rgba(13,13,13,0.8); z-index:1000; transition:0.3s;}
+    nav a {margin:0 15px; font-weight:700; text-transform:uppercase; font-size:0.9rem;}
+
+    /* Hero Slideshow */
+    .hero {height:100vh; position:relative; overflow:hidden; display:flex; justify-content:center; align-items:center; text-align:center;}
+    .hero-slideshow {position:absolute; top:0; left:0; width:100%; height:100%;}
+    .slide {position:absolute; top:0; left:0; width:100%; height:100%; background-size:cover; background-position:center; opacity:0; animation:fadeSlides 18s infinite;}
+    .slide:nth-child(1) {animation-delay:0s;}
+    .slide:nth-child(2) {animation-delay:6s;}
+    .slide:nth-child(3) {animation-delay:12s;}
+    .hero::after {content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4);}
+    .hero-content {position:relative; z-index:2; color:#fff; opacity:0; transform:translateY(20px); animation:fadeIn 1s forwards 0.5s;}
+    .hero-content h1 {font-family:'Playfair Display', serif; font-size:3rem; margin-bottom:10px;}
+    .hero-content p {font-size:1.2rem; margin-bottom:20px;}
+    .hero-content .btn {padding:12px 30px; border:2px solid #cfa17a; color:#cfa17a; font-weight:700; transition:0.3s;}
+    .hero-content .btn:hover {background:#cfa17a; color:#0d0d0d;}
+
+    @keyframes fadeSlides {
+      0% {opacity:0;}
+      8% {opacity:1;}
+      33% {opacity:1;}
+      41% {opacity:0;}
+      100% {opacity:0;}
+    }
+
+    @keyframes fadeIn {
+      to {opacity:1; transform: translateY(0);}
+    }
+
+    /* Portfolio */
+    .portfolio {padding:80px 0; text-align:center;}
+    .portfolio h2 {font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:40px; opacity:0; transform:translateY(20px);}
+    .gallery {display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px;}
+    .gallery-item {overflow:hidden; position:relative; opacity:0; transform:translateY(20px);}
+    .gallery-item img {transition: transform 0.5s;}
+    .gallery-item:hover img {transform: scale(1.05);}
+    .gallery-item::after {content:""; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.2); transition:0.3s;}
+    .gallery-item:hover::after {background:rgba(0,0,0,0);}
+
+    /* About */
+    .about {padding:80px 0; background:#111; display:flex; flex-wrap:wrap; align-items:center; gap:40px; opacity:0; transform:translateY(20px);}
+    .about-text {flex:1; min-width:300px;}
+    .about-text h2 {font-family:'Playfair Display', serif; font-size:2rem; margin-bottom:20px;}
+    .about-text p {font-size:1.1rem; color:#ddd;}
+    .about-img {flex:1; min-width:300px;}
+    .about-img img {border-radius:10px;}
+
+    /* Contact */
+    .contact {padding:80px 0; text-align:center; opacity:0; transform:translateY(20px);}
+    .contact h2 {font-family:'Playfair Display', serif; font-size:2.5rem; margin-bottom:30px;}
+    .contact p {margin-bottom:20px; color:#ddd;}
+    .contact .btn {padding:12px 30px; border:2px solid #cfa17a; color:#cfa17a; font-weight:700; transition:0.3s;}
+    .contact .btn:hover {background:#cfa17a; color:#0d0d0d;}
+
+    /* Footer */
+    footer {padding:20px; text-align:center; background:#111; color:#888;}
+
+    /* Animation helper for scroll */
+    .show {opacity:1 !important; transform:translateY(0) !important; transition:0.6s;}
+  </style>
 </head>
 <body>
-    <header>
-        <div class="hero-slideshow">
-            <img src="images/hero1.jpg" alt="Hero Image 1">
-            <img src="images/hero2.jpg" alt="Hero Image 2">
-            <img src="images/hero3.jpg" alt="Hero Image 3">
-        </div>
-        <h1>Welcome to Vestige Photography</h1>
-    </header>
-    <section class="portfolio-gallery">
-        <h2>Portfolio</h2>
-        <div class="gallery">
-            <img src="images/photo1.jpg" alt="Photo 1">
-            <img src="images/photo2.jpg" alt="Photo 2">
-            <img src="images/photo3.jpg" alt="Photo 3">
-        </div>
-    </section>
-    <section class="about">
-        <h2>About Us</h2>
-        <img src="about.webp" alt="About Us">
-        <p>Vestige Photography captures the essence of life through our lens.</p>
-    </section>
-    <footer>
-        <p>&copy; 2026 Vestige Photography</p>
-    </footer>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#hero">Home</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- Hero Slideshow -->
+  <section class="hero" id="hero">
+    <div class="hero-slideshow">
+      <div class="slide" style="background-image:url('images/hero1.webp');"></div>
+      <div class="slide" style="background-image:url('images/hero2.webp');"></div>
+      <div class="slide" style="background-image:url('images/hero3.webp');"></div>
+    </div>
+    <div class="hero-content">
+      <h1>Vestige Photography</h1>
+      <p>Empowering Confidence Through Pinup & Glamour</p>
+      <a href="#contact" class="btn">Book Your Session</a>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <h2>Portfolio</h2>
+      <div class="gallery">
+        <div class="gallery-item"><img src="images/gallery1.webp" alt="Gallery Image 1"></div>
+        <div class="gallery-item"><img src="images/gallery2.webp" alt="Gallery Image 2"></div>
+        <div class="gallery-item"><img src="images/gallery3.webp" alt="Gallery Image 3"></div>
+        <div class="gallery-item"><img src="images/gallery1.webp" alt="Gallery Image 4"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-text">
+        <h2>About Susana</h2>
+        <p>Vestige Photography celebrates confidence, beauty, and empowerment through pinup and boudoir photography. Each session is designed to capture your unique style and strength, creating timeless memories that inspire.</p>
+      </div>
+      <div class="about-img">
+        <img src="images/about.webp" alt="Susana Portrait">
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <h2>Get in Touch</h2>
+      <p>Ready to book your empowering session? Reach out today!</p>
+      <a href="mailto:hello@vestigephotography.com" class="btn">Contact Me</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2026 Vestige Photography | <a href="https://www.instagram.com/susanavestige/" target="_blank">Instagram</a>
+  </footer>
+
+  <!-- Scroll Animations -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+        }
+      });
+    }, {threshold:0.2});
+
+    document.querySelectorAll('.portfolio h2, .gallery-item, .about, .contact').forEach(el => observer.observe(el));
+  </script>
+
 </body>
 </html>
